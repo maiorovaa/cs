@@ -1,0 +1,171 @@
+//новелла
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            StartAdventure();
+            Console.WriteLine("Хотите сыграть снова? (да/нет)");
+            string playAgain = Console.ReadLine();
+            if (playAgain.ToLower() != "да")
+                break;
+        }
+    }
+
+    static void StartAdventure()
+    {
+        Console.WriteLine("Ваш персонаж - Ам Ням, надо дотянуться до конфеты!");
+        Level1();
+    }
+
+    static void Level1()
+    {
+        Console.WriteLine("Уровень 1: Вы видите конфету на дереве.");
+        Console.WriteLine("Что вы хотите сделать? (прыгнуть/подойти)");
+        string choice = Console.ReadLine();
+
+        if (choice.ToLower() == "прыгнуть")
+            Level2_Jump();
+        else
+            Level2_Approach();
+    }
+
+    static void Level2_Jump()
+    {
+        Console.WriteLine("Уровень 2: Вы приземляетесь рядом с конфетой.");
+        Console.WriteLine("Что вы хотите сделать? (взять/осмотреть)");
+        string choice = Console.ReadLine();
+
+        if (choice.ToLower() == "взять")
+            Level3_TakeCandy();
+        else
+            Level3_Inspect();
+    }
+
+    static void Level2_Approach()
+    {
+        Console.WriteLine("Уровень 2: Вы подходите к дереву, но оно начинает качаться.");
+        Console.WriteLine("Что вы хотите сделать? (прыгать/отойти)");
+        string choice = Console.ReadLine();
+
+        if (choice.ToLower() == "прыгать")
+            Level3_JumpAway();
+        else
+            Level3_BackAway();
+    }
+
+    static void Level3_TakeCandy()
+    {
+        Console.WriteLine("Уровень 3: Вы берете конфету и радуетесь!");
+        Ending1();
+    }
+
+    static void Level3_Inspect()
+    {
+        Console.WriteLine("Уровень 3: Вы осматриваете конфету и находите ловушку!");
+        Ending2();
+    }
+
+    static void Level3_JumpAway()
+    {
+        Console.WriteLine("Уровень 3: Вы прыгаете в сторону и спасаетесь от падения!");
+        Ending3();
+    }
+
+    static void Level3_BackAway()
+    {
+        Console.WriteLine("Уровень 3: Вы отходите и видите, как дерево падает.");
+        Ending4();
+    }
+
+    // Добавляем больше уровней
+    static void Level4()
+    {
+        Console.WriteLine("Уровень 4: Вы видите реку с конфетами на другом берегу.");
+        Console.WriteLine("Что вы хотите сделать? (переплыть/найти мост)");
+        string choice = Console.ReadLine();
+
+        if (choice.ToLower() == "переплыть")
+            Ending5();
+        else
+            Ending6();
+    }
+
+    static void Level5()
+    {
+        Console.WriteLine("Уровень 5: Вы находите пчел, которые защищают конфеты.");
+        Console.WriteLine("Что вы хотите сделать? (попробовать уговорить/убежать)");
+        string choice = Console.ReadLine();
+
+        if (choice.ToLower() == "попробовать уговорить")
+            Ending7();
+        else
+            Ending8();
+    }
+
+    static void Level6()
+    {
+        Console.WriteLine("Уровень 6: Мост начинает разрушаться.");
+        Console.WriteLine("Что вы хотите сделать? (бежать/остановиться)");
+        string choice = Console.ReadLine();
+
+        if (choice.ToLower() == "бежать")
+            Ending9();
+        else
+            Ending10();
+    }
+
+    // Концовки
+    static void Ending1()
+    {
+        Console.WriteLine("Победа!");
+    }
+
+    static void Ending2()
+    {
+        Console.WriteLine("Вы попались в ловушку и не смогли взять конфету. Попробуйте снова!");
+    }
+
+    static void Ending3()
+    {
+        Console.WriteLine("Вы спасаетесь от дерева, но конфета уходит от вас. Попробуйте снова!");
+    }
+
+    static void Ending4()
+    {
+        Console.WriteLine("Вы наблюдаете за падением дерева и понимаете, что конфета недоступна. Попробуйте снова!");
+    }
+
+    static void Ending5()
+    {
+        Console.WriteLine("Вы переплываете реку, но теряете все конфеты! Попробуйте снова!");
+    }
+
+    static void Ending6()
+    {
+        Console.WriteLine("Вы находите безопасный путь через мост и достигаете конфет! Победа!");
+    }
+
+    static void Ending7()
+    {
+        Console.WriteLine("Пчелы соглашаются поделиться конфетами! Победа!");
+    }
+
+    static void Ending8()
+    {
+        Console.WriteLine("Вы убегаете от пчел и теряете шанс на конфеты. Попробуйте снова!");
+    }
+
+    static void Ending9()
+    {
+        Console.WriteLine("Вы успеваете сбежать с моста, но конфеты уходят от вас. Попробуйте снова!");
+    }
+
+    static void Ending10()
+    {
+        Console.WriteLine("Вы останавливаетесь, и мост обрушивается. Попробуйте снова!");
+    }
+}
