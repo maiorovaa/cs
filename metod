@@ -1,0 +1,62 @@
+//методы
+задача 1
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static int SumList(List<int> numbers)
+    {
+        int sum = 0;
+        foreach (var number in numbers)
+        {
+            sum += number;
+        }
+        return sum;
+    }
+}
+задача 2
+public static bool IsPalindrome(string str)
+{
+    // Удаляем пробелы и приводим к нижнему регистру
+    str = str.Replace(" ", "").ToLower();
+    char[] arr = str.ToCharArray();
+    Array.Reverse(arr);
+    return str == new string(arr);
+}
+задача 3
+public static long Factorial(int n)
+{
+    if (n < 0) throw new ArgumentException("Факториал не определен для отрицательных чисел.");
+    if (n == 0) return 1;
+    
+    long result = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        result *= i;
+    }
+    return result;
+}
+задача 4
+public static int FindMax(List<int> numbers)
+{
+    if (numbers == null || numbers.Count == 0)
+        throw new ArgumentException("Список не должен быть пустым.");
+    
+    int max = numbers[0];
+    foreach (var number in numbers)
+    {
+        if (number > max)
+        {
+            max = number;
+        }
+    }
+    return max;
+}
+задача 5
+public static List<int> RemoveDuplicates(List<int> numbers)
+{
+    HashSet<int> uniqueNumbers = new HashSet<int>(numbers);
+    return new List<int>(uniqueNumbers);
+}
+
