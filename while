@@ -1,0 +1,117 @@
+//циклы
+using System;
+
+namespace DepositCalculatorFor
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Калькулятор вклада");
+
+            Console.Write("Введите сумму вклада: ");
+            decimal initialDeposit = Convert.ToDecimal(Console.ReadLine());
+
+            Console.Write("Введите количество месяцев: ");
+            int months = Convert.ToInt32(Console.ReadLine());
+
+            decimal currentAmount = initialDeposit;
+
+            for (int i = 0; i < months; i++)
+            {
+                currentAmount += currentAmount * 0.07m;  // 7% от суммы
+            }
+
+            Console.WriteLine($"Сумма вклада через {months} месяцев: {currentAmount:F2}"); // :F2 для 2 знаков после запятой
+            Console.ReadKey();
+        }
+    }
+}
+задание 2
+using System;
+
+namespace DepositCalculatorWhile
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Калькулятор вклада");
+
+            Console.Write("Введите сумму вклада: ");
+            decimal initialDeposit = Convert.ToDecimal(Console.ReadLine());
+
+            Console.Write("Введите количество месяцев: ");
+            int months = Convert.ToInt32(Console.ReadLine());
+
+            decimal currentAmount = initialDeposit;
+            int i = 0;
+
+            while (i < months)
+            {
+                currentAmount += currentAmount * 0.07m;
+                i++;
+            }
+
+            Console.WriteLine($"Сумма вклада через {months} месяцев: {currentAmount:F2}");
+            Console.ReadKey();
+        }
+    }
+}
+
+задание 3
+using System;
+
+namespace MultiplicationTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Таблица умножения");
+
+            for (int i = 1; i <= 10; i++)
+            {
+                for (int j = 1; j <= 10; j++)
+                {
+                    Console.Write($"{i * j,4}"); // ,4 для выравнивания по ширине 4 символа
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+задача 4
+using System;
+
+namespace RangeMultiplier
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.Write("Введите первое число (0-10): ");
+                int num1 = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Введите второе число (0-10): ");
+                int num2 = Convert.ToInt32(Console.ReadLine());
+
+                if (num1 < 0 || num1 > 10 || num2 < 0 || num2 > 10)
+                {
+                    Console.WriteLine("Введенные числа недопустимы. Пожалуйста, введите числа в диапазоне от 0 до 10.");
+                }
+                else
+                {
+                    Console.WriteLine($"Результат умножения: {num1 * num2}");
+                    break;  // Выход из цикла, если числа в диапазоне
+                }
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
