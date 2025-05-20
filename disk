@@ -1,0 +1,85 @@
+//приложение для работы с дисками
+using System;
+using System.IO;
+
+namespace SimpleDiskManager
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.WriteLine("Simple Disk Manager");
+                Console.WriteLine("---------------------");
+                Console.WriteLine("1. List Drives");
+                Console.WriteLine("2. Get Drive Info");
+                Console.WriteLine("3. Exit");
+
+                Console.Write("Enter your choice: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        ListDrives();
+                        break;
+                    case "2":
+                        GetDriveInfo();
+                        break;
+                    case "3":
+                        Console.WriteLine("Exiting...");
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+
+                Console.WriteLine(); // Add a blank line for readability
+            }
+        }
+
+        static void ListDrives()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+
+            Console.WriteLine("Available Drives:");
+            foreach (DriveInfo drive in drives)
+            {
+                Console.WriteLine($"- {drive.Name}");
+            }
+        }
+
+        static void GetDriveInfo()
+        {
+            Console.Write("Enter drive letter (e.g., C): ");
+            string driveLetter = Console.ReadLine().ToUpper();
+
+            try
+            {
+                DriveInfo drive = new DriveInfo(driveLetter + ":\\"); // Add ":\\" to create a valid root path
+                if (drive.IsReady)
+                {
+                    Console.WriteLine($"  Name: {drive.Name}");
+                    Console.WriteLine($"  Type: {drive.DriveType}");
+                    Console.WriteLine($"  Format: {drive.DriveFormat}");
+                    Console.WriteLine($"  Total Size: {drive.TotalSize / (1024 × 1024 × 1024)} GB");  // Convert to GB
+                    Console.WriteLine($"  Available Free Space: {drive.AvailableFreeSpace / (1024 × 1024 × 1024)} GB"); // Convert to GB
+                    Console.WriteLine($"  Volume Label: {drive.VolumeLabel}");
+                }
+                else
+                {
+                    Console.WriteLine("Drive is not ready.");
+                }
+            }
+            catch (DriveNotFoundException)
+            {
+                Console.WriteLine("Drive not found.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+    }
+}
