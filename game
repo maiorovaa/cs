@@ -1,0 +1,116 @@
+// крестики нолики
+using System;
+
+public class TicTacToe
+{
+    static char[] board = { '1', '2', '3', '4', '5', '6', '7', '8', '9' }; // Игровое поле
+    static int currentPlayer = 1; // 1 - игрок 1 (X), 2 - игрок 2 (O)
+    static int turns = 0; // Количество ходов
+    static bool gameEnded = false;
+
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Добро пожаловать в игру!");
+
+        while (!gameEnded)
+        {
+            DrawBoard(); // Вывод игрового поля
+            PlayerTurn(); // Ход текущего игрока
+            turns++;
+
+            CheckForWin(); // Проверка на победу
+            CheckForDraw(); // Проверка на ничью
+
+            // Смена игрока
+            currentPlayer = (currentPlayer == 1) ? 2 : 1;
+        }
+
+        Console.ReadKey();
+    }
+
+    // Вывод игрового поля на экран
+    static void DrawBoard()
+    {
+        Console.Clear(); // Очистка консоли
+
+        Console.WriteLine("     |     |      ");
+        Console.WriteLine("  {0}  |  {1}  |  {2}   ", board[0], board[1], board[2]);
+        Console.WriteLine("_____|_____|_____ ");
+        Console.WriteLine("     |     |      ");
+        Console.WriteLine("  {0}  |  {1}  |  {2}   ", board[3], board[4], board[5]);
+        Console.WriteLine("_____|_____|_____ ");
+        Console.WriteLine("     |     |      ");
+        Console.WriteLine("  {0}  |  {1}  |  {2}   ", board[6], board[7], board[8]);
+        Console.WriteLine("     |     |      ");
+
+        Console.WriteLine("nИгрок {0} сейчас ходит. Выберите номер клетки: ", currentPlayer);
+    }
+
+    // Ход игрока
+    static void PlayerTurn()
+    {
+        int playerChoice = 0;
+        bool validInput = false;
+
+        while (!validInput)
+        {
+            Console.Write("Выберите клетку (1-9): ");
+            string input = Console.ReadLine();
+
+            if (int.TryParse(input, out playerChoice) && playerChoice >= 1 && playerChoice <= 9)
+            {
+                playerChoice--; // Сдвиг индекса для массива (0-8)
+
+                if (board[playerChoice] != 'X' && board[playerChoice] != 'O')
+                {
+                    board[playerChoice] = (currentPlayer == 1) ? 'X' : 'O';
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Эта клетка уже занята! Попробуйте еще раз.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Неверный ввод. Пожалуйста, введите число от 1 до 9.");
+            }
+        }
+    }
+
+    // Проверка на победу
+    static void CheckForWin()
+    {
+        // Горизонтальные линии
+        if (board[0] == board[1] && board[1] == board[2]) { EndGame(currentPlayer); }
+        if (board[3] == board[4] && board[4] == board[5]) { EndGame(currentPlayer); }
+        if (board[6] == board[7] && board[7] == board[8]) { EndGame(currentPlayer); }
+
+        // Вертикальные линии
+        if (board[0] == board[3] && board[3] == board[6]) { EndGame(currentPlayer); }
+        if (board[1] == board[4] && board[4] == board[7]) { EndGame(currentPlayer); }
+        if (board[2] == board[5] && board[5] == board[8]) { EndGame(currentPlayer); }
+
+        // Диагонали
+        if (board[0] == board[4] && board[4] == board[8]) { EndGame(currentPlayer); }
+        if (board[2] == board[4] && board[4] == board[6]) { EndGame(currentPlayer); }
+    }
+
+    // Проверка на ничью
+    static void CheckForDraw()
+    {
+        if (turns == 9 && !gameEnded)
+        {
+            Console.WriteLine("nНичья!");
+            gameEnded = true;
+        }
+    }
+
+    // Завершение игры
+    static void EndGame(int winner)
+    {
+        DrawBoard(); // Показать итоговое поле
+        Console.WriteLine("nИгрок {0} победил!", winner);
+        gameEnded = true;
+    }
+}
